@@ -6,6 +6,9 @@ the aim of the project is to annotate images in Roboflow and using an API to tra
 frame work on Google collaboratory.
 
 
+![MaskDetection.gif](binary captured)
+
+
 We used a custom dataset (the wearing mask dataset from Roboflow) to train a YOLOv5 model
 using the TensorFlow framework in Google Colab.
 The input can be an image or a video, and the output will be a detection of whether a mask is being worn or not."
