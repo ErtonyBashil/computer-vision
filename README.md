@@ -1,28 +1,23 @@
 # Mask Detection Based on YOLOv5 pytorch
 
-In this project we will train a custom dataset (wearing mask dataset from roboflow) with 
- TensorFlow framework is used to train the YOLOv5 model in Google Collaboratory. The input is an image or a video, and the output is the detection wearing
-a mask or not. 
+
+The project is a requirement due to complete the computer vision module at semester Dakar Institute of Technology 
+the aim of the project is to annotate images in Roboflow and using an API to train the YOLOv5 model implemented pytorch
+frame work on Google collaboratory.
 
 
-**Model** : YOLOv5 is a deep learning object detection developed by Jocher et al., (2020) using
-PyTorch. Thus, it can benefit from the ecosystem of PyTorch, which includes but is
-not limited to more superficial support and easier deployment. One of the biggest
+We used a custom dataset (the wearing mask dataset from Roboflow) to train a YOLOv5 model
+using the TensorFlow framework in Google Colab.
+The input can be an image or a video, and the output will be a detection of whether a mask is being worn or not."
+
+YOLOv5 is a deep learning object detection developed by Jocher et al., (2020) using
+PyTorch, thus, it can benefit from the ecosystem of PyTorch.  One of the biggest
 reasons that make YOLOv5 popular is the productivity; YOLOv5 is very fast in terms
-of processing speed, but even though it is speedy, it still can balance the accuracy,
-which makes it even better.
+of processing speed, but even though it is speedy, it still can balance the accuracy, which makes it even better.
 
-Integration of improved YOLOv5 for face mask detector and auto-labeling to generate dataset
-for fighting against COVID-19 The overall technical contributions of this research are presented as follows. 
-At the time of its debut, the biggest difference between the two versions 
-is that YOLOv5 is implemented on the PyTorch platform. which could be used in many development environments, 
-instead of the YOLOv4-Darknet.
-
-In addition, by taking advantage of the PyTorch framework, the advantages of YOLOv5 models were a significantly smaller size, 
+According to [ Integration of improved YOLOv5 for face mask detector and auto-labeling to generate dataset forfighting against COVID-19]
+(https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9809528/) paper, by taking advantage of the PyTorch framework, the advantages of YOLOv5 models were a significantly smaller size, 
 faster training time, and more accessibility to deployment in real-world applications.
-
-
-[according to](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9809528/)
 
 We used manual labelization on Roboflow, we have performed random resized cropping and a vertical flip to each image dataset. Besides that, we also make
 the Dataset square images with a usual pixel size of 224 x 224 since most deep neural networks, including ResNet, 
@@ -35,13 +30,6 @@ photos are divided into a training set with 682 illustrations, a testing set wit
 85 images. This study using YOLOv5 as the training model. This study obtains the greatest result in 300 epochs instead
 of 500 epochs, which prove that the higher epochs doesn’t always mean the greater performance.
 
-Roboflow offers an easy data augmentation function for users by clicking and setting up a few
-things the annotation was done ....
-
-
-The Adam Optimizer using binary cross-entropy was
-used to generate the model. The mark detection system was able to show excellent
-result with accuracy of 97.8% with ResNet50.
 
 
 ### Implementation
@@ -101,6 +89,10 @@ This study has faced a major training environment problem. Due to the low-level
 hardware, the training progress shall also consider some parameters that will affect
 the hardware memory.
 
+
+The Adam Optimizer using binary cross-entropy was
+used to generate the model. The mark detection system was able to show excellent
+result with accuracy of 97.8% with ResNet50.
 
 
 
