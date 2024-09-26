@@ -6,7 +6,7 @@ The aim of the project is to annotate images using Roboflow and then utilize an 
 model, implementing PyTorch framework, on Google Colaboratory
 
 
-![Demo gif](images/MaskDetection.gif)
+![Demo gif](test_data/MaskDetection.gif)
 
 
 We used a custom dataset (the wearing mask dataset from Roboflow) to train a YOLOv5 model
@@ -89,40 +89,32 @@ files.download('./runs/train/exp3/weights/best.pt')
 ```
 
 ![zidane Mask detection](test_data/zidane.jpg) ![Multiple Mask detection](test_data/multiple.jpg)
-![Joselyne](test_data/joselyne.jpg)
+![Joselyne](test_data/Joselyne.jpg)
 
 ###  The result
 <hr>
-Through these experiments, we observed
-that the object background complexity will hugely affect the object detection result.
-This study obtains a precision of 95% and 77% recall at the end of the study
+Through these experiments, we observedthat the object background complexity will hugely affect the object detection result.
+This study obtains a precision of 94% and 77% recall at the end of the project
 
-This experiment contains 7959 images for the Dataset. In addition, this experiment uses Fine-tune as the transfer
-learning strategy. They first pre-trained the PP-YOLO with the Dataset annotated in PascalVoc format, and a set of the Dataset with Mix-up data is sent to migration
-training. This experiment obtains the highest 89.69% mAP by using PP-YOLO-mask. Through these experiments, we also can conclude that some enhancement strategy is
-recommendable to enhance our model.
+This experiment contains 7959 images for the Dataset. As mentioned before, this study has labelled the dataset into 3 classes, which are
+"masque", "pas de masque", "masque mal porte".
 
-As mentioned before, this study has labelled the dataset into 5 classes, which are
-"Head", "Helmet", "Incorrect Mask", "No Wearing Mask" and "Wearing Mask".
-Consider the training environment and how to find the optimal batch size.
-This study completed the model training with 3 different batch sizes. The training
-per epochs in different batch sizes and the training loss are considerable values while Considering 
-the time consumed and the accuracy and the training loss, this study found out that an epoch equal to 60 is the most suitable parameter for this study to
-use. Even though precision resulted better in epochs 50, but the overall score shows
-that the epochs 60 are consider good as well.
+Batch : 80
+Epochs : 256
+image size : 640
 
-Difficulty while training the YOLOv5 model
-This study has faced a major training environment problem. Due to the low-level
-hardware, the training progress shall also consider some parameters that will affect
-the hardware memory.
+We found out that an epoch equal to 300 and 120 iteration was the most suitable parameter for this project
+However we faced a major training environment problem due to the low-level
+hardware granted on collab. Therefore, We trained with 250 epochs and 80 iterations
+use. Even though precision resulted better in epochs 80, but the overall score shows that the epochs 120 are consider good as well.
 
 
-The Adam Optimizer using binary cross-entropy was
-used to generate the model. The mark detection system was able to show excellent
-result with accuracy of 97.8% with ResNet50.
+The Adam Optimizer using binary cross-entropy was used to generate the model. 
+The mark detection system was able to show excellent result with accuracy of 97.8%.
 
-
-
+During the annotation we chose some pictures with no head as null values.
+We first found out that core success of the project lied on the labelization. No matter how you ajust the parameters
+is the annotation is not done well, the score turns to be awfull.
 
 
 
