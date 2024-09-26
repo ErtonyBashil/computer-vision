@@ -1,16 +1,13 @@
 # Mask Detection Based on YOLOv5 pytorch
 
 
-The project is a requirement due to complete the computer vision module at semester Dakar Institute of Technology 
-the aim of the project is to annotate images in Roboflow and using an API to train the YOLOv5 model implemented pytorch
-frame work on Google collaboratory.
+The project is a requirement for completing the Computer Vision module at Dakar Institute of Technology.
+The aim of the project is to annotate images using Roboflow and then utilize an API to train the YOLOv5 
+model, implementing PyTorch framework, on Google Colaboratory
 
 
-![MaskDetection.gif](binary captured)
+![Demo gif](MaskDetection.gif)
 
-
-
-![vid.mp4](binary captured)
 
 
 We used a custom dataset (the wearing mask dataset from Roboflow) to train a YOLOv5 model
