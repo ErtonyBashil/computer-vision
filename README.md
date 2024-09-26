@@ -6,22 +6,12 @@ The aim of the project is to annotate images using Roboflow and then utilize an 
 model, implementing PyTorch framework, on Google Colaboratory
 
 
-![Demo gif](MaskDetection.gif)
-
+![Demo gif](images/MaskDetection.gif)
 
 
 We used a custom dataset (the wearing mask dataset from Roboflow) to train a YOLOv5 model
 using the TensorFlow framework in Google Colab.
 The input can be an image or a video, and the output will be a detection of whether a mask is being worn or not."
-
-YOLOv5 is a deep learning object detection developed by Jocher et al., (2020) using
-PyTorch, thus, it can benefit from the ecosystem of PyTorch.  One of the biggest
-reasons that make YOLOv5 popular is the productivity; YOLOv5 is very fast in terms
-of processing speed, but even though it is speedy, it still can balance the accuracy, which makes it even better.
-
-According to [ Integration of improved YOLOv5 for face mask detector and auto-labeling to generate dataset forfighting against COVID-19]
-(https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9809528/) paper, by taking advantage of the PyTorch framework, the advantages of YOLOv5 models were a significantly smaller size, 
-faster training time, and more accessibility to deployment in real-world applications.
 
 We used manual labelization on Roboflow, we have performed random resized cropping and a vertical flip to each image dataset. Besides that, we also make
 the Dataset square images with a usual pixel size of 224 x 224 since most deep neural networks, including ResNet, 
@@ -37,39 +27,72 @@ of 500 epochs, which prove that the higher epochs doesn’t always mean the grea
 
 
 ### Implementation
-
-
-
-
-
-
-
-according to [A YOVO5 Based Real-time Helmet and Mask ](https://www.aasmr.org/liss/Vol.9/No.3%202022/Vol.9.No.3.08.pdf) paper
-
-
-
- 
-
-Jian and Lang (2021) have created a face mask detection model based on
-PaddlePaddle, You only look once (PP-YOLO) and enhanced the model with
-
-
+<hr>
 
 
 transfer learning due to insufficient data samples
 
-1. Set up the wokplace
+1. Clone Repo and install all dependencies
 
-    Add the daatset to google colab
+```python
+!git clone https://github.com/ultralytics/yolov5  # clone repo
+%cd yolov5
+%pip install -qr requirements.txt # install dependencies
+%pip install -q roboflow
 
-2. Add the face-mask.yaml file to /yolov5/data/
+import torch
+import os
+from IPython.display import Image, clear_output  # to display images
 
-4. Clone the yolov5 repo
+print(f"Setup complete. Using torch {torch.__version__} ({torch.cuda.get_device_properties(0).name if torch.cuda.is_available() else 'CPU'})")
+```
 
-5. Change your directory to the cloned
 
+**Step 2.  Install roboflow and import dataset using roboflow API**
+
+```python
+!pip install roboflow
+
+from roboflow import Roboflow
+rf = Roboflow(api_key="-------------------")
+project = rf.workspace("ditnov202").project("face_mask_detection-wfniz")
+dataset = project.version(1).download("yolov5")
+```
+
+
+**Step 3: Train Our Custom YOLOv5 model**
+
+```python
+!python train.py --img 640 --batch 80 --epochs 256 --data {dataset.location}/data.yaml --weights yolov5s.pt --cache
+```
+
+**4. Run the inference with the trained weight**
+
+```python
+!python detect.py --weights /content/yolov5/runs/train/exp3/weights/best.pt --img 640 --conf 0.1 --source /content/yolov5/data/images/zidane.jpg
+
+```
+**5. Display inference on ALL test images**
+
+```python
+import glob
+from IPython.display import Image, display
+
+for imageName in glob.glob('/content/yolov5/runs/detect/exp4/*.jpg'): #assuming JPG
+    display(Image(filename=imageName))
+    
+!python detect.py --weights /content/yolov5/runs/train/exp3/weights/best.pt  --conf 0.25 --source '/content/Test_data'
+
+#export the model's weights for future use
+from google.colab import files
+files.download('./runs/train/exp3/weights/best.pt')
+```
+
+![zidane Mask detection](test_data/zidane.jpg) ![Multiple Mask detection](test_data/multiple.jpg)
+![Joselyne](test_data/joselyne.jpg)
 
 ###  The result
+<hr>
 Through these experiments, we observed
 that the object background complexity will hugely affect the object detection result.
 This study obtains a precision of 95% and 77% recall at the end of the study
